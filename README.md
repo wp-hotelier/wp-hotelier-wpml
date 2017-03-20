@@ -22,7 +22,7 @@ To translate a room, you just need to follow the same steps required to translat
 
 ![WPML translate icon](https://d2salfytceyqoe.cloudfront.net/wp-content/uploads/2011/01/wpml-add-translation.png)
 
-The idea is to create and exact copy of the room in each translation. Same price, rates and settings. That's because is the original room (the room created in the default language) the one is added to the cart, regardless of the language selected by the guest. So, each translation must have the same features.
+The idea is to create an exact copy of the room in each translation. Same price, rates and settings. That's because is the original room (the room created in the default language) the one is added to the cart, regardless of the language selected by the guest. So, each translation must have the same features.
 
 The easiest way to do this is click on the **"Overwrite with English content"** button (replace *English* with your default language):
 
@@ -30,10 +30,10 @@ The easiest way to do this is click on the **"Overwrite with English content"** 
 
 This will sync the content of the translation with the content of the room created with the default language. You don't want to sync the content in this way forever, otherwise you will not be able to modify each translation independently. That's only a quick and temporary way to populate the translation with the same settings of the default room. After the sync, click on the **"Translate independently"** button to make this translation independent again and save the room.
 
-If the room is a variable room, assign the correct rate to each variation. Unfortunately rate names are not synchronized correctly, so you need to re-assign the correct rate in the select.
+If the room is a variable room, assign the correct rate to each variation. Unfortunately rate names are not synchronized correctly, so you need to re-assign the correct rate in the select dropdown.
 
-**VERY IMPORTANT**: the default room and his translation must have the **same variations** (if it is a variable room of course). But it is not enough; you must have them in the **same order**!
+**VERY IMPORTANT**: Variable rooms must have the **same variations** in the **same order** in each language!
 
 ## Conclusion
 
-That's it. If you need help with WPML contact his authors directly. As usual, support is not provided for third-party plugins.
+That's it. If you need help with WPML contact his authors directly. Again, no support is provided for this extension (or for WPML).
