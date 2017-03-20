@@ -1,0 +1,52 @@
+<wpml-config>
+	<custom-types>
+		<custom-type translate="1">room</custom-type>
+		<custom-type translate="0">reservation</custom-type>
+	</custom-types>
+	<taxonomies>
+		<taxonomy translate="1">room_cat</taxonomy>
+		<taxonomy translate="1">room_rate</taxonomy>
+		<taxonomy translate="1">room_facilities</taxonomy>
+	</taxonomies>
+	<custom-fields>
+		<custom-field action="copy">_max_guests</custom-field>
+		<custom-field action="copy">_max_children</custom-field>
+		<custom-field action="translate">_bed_size</custom-field>
+		<custom-field action="copy">_room_size</custom-field>
+		<custom-field action="copy">_stock_rooms</custom-field>
+		<custom-field action="copy">_room_type</custom-field>
+		<custom-field action="copy">_price_type</custom-field>
+		<custom-field action="copy">_regular_price</custom-field>
+		<custom-field action="copy">_sale_price</custom-field>
+		<custom-field action="copy">_regular_price_day</custom-field>
+		<custom-field action="copy">_sale_price_day</custom-field>
+		<custom-field action="copy">_seasonal_base_price</custom-field>
+		<custom-field action="copy">_seasonal_price</custom-field>
+		<custom-field action="copy">_require_deposit</custom-field>
+		<custom-field action="copy">_deposit_amount</custom-field>
+		<custom-field action="copy">_non_cancellable</custom-field>
+		<custom-field action="translate">_room_conditions</custom-field>
+		<custom-field action="translate">_room_variations</custom-field>
+		<custom-field action="translate">_room_additional_details</custom-field>
+	</custom-fields>
+	<admin-texts>
+		<key name="hotelier_settings">
+			<key name="hotel_pets_message" />
+			<key name="stripe_message" />
+			<key name="emails_from_name" />
+			<key name="emails_footer_text" />
+			<key name="emails_new_reservation_subject" />
+			<key name="emails_new_reservation_heading" />
+			<key name="emails_request_received_subject" />
+			<key name="emails_request_received_heading" />
+			<key name="emails_confirmed_reservation_subject" />
+			<key name="emails_confirmed_reservation_heading" />
+			<key name="emails_guest_invoice_subject" />
+			<key name="emails_guest_invoice_heading" />
+			<key name="emails_cancelled_reservation_subject" />
+			<key name="emails_cancelled_reservation_heading" />
+			<key name="emails_guest_cancelled_reservation_subject" />
+			<key name="emails_guest_cancelled_reservation_heading" />
+		</key>
+	</admin-texts>
+<wpml-config>

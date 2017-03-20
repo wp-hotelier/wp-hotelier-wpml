@@ -1,0 +1,22 @@
+{
+	"name": "wp-hotelier-wpml",
+	"description": "Integrate WPML with Hotelier.",
+	"version": "0.9.0",
+	"homepage": "http://wphotelier.com/",
+	"author": "Benito Lopez http://lopezb.com/",
+	"scripts": {
+		"run:pot": "rm -rf dist; wp-pot --src '**/*.php' --dest-file languages/hotelier-wpml.pot --domain hotelier-wpml --package 'WP Hotelier Multilingual' --bug-report http://wphotelier.com --team 'WP Hotelier <hello@wphotelier.com>'",
+		"run:sync": "rsync -azP -e \"ssh -p ${npm_config_P_SSHPORT}\" --delete --exclude='package.json' --exclude='.*/' --exclude='.*' --exclude='node_modules/' --exclude='dist/' . \"${npm_config_P_SYNCDEST}\"",
+		"build:pot": "onchange '**/*.php' -i -w -- npm run run:pot",
+		"sync": "onchange '**/*' -e 'dist' -e '.git' -e 'languages' -w -- npm run run:sync",
+		"dirs": "mkdir -p languages; touch languages/hotelier-wpml.pot;",
+		"zip": "rsync -azP -e --delete --exclude='package.json' --exclude='.*/' --exclude='.*' --exclude='node_modules/' --exclude='dist/' . dist/hotelier-wpml; cd dist; zip -r hotelier-wpml.zip hotelier-wpml; cd ..",
+		"build": "npm run dirs -s; npm-run-all --silent --parallel build:*",
+		"build-sync": "npm run dirs -s; npm-run-all --silent --parallel build:* sync",
+		"dist": "rm -rf dist; mkdir -p dist/hotelier-wpml; npm run zip -s"
+	},
+	"devDependencies": {
+		"npm-run-all": "^3.1.2",
+		"onchange": "^3.2.1"
+	}
+}
