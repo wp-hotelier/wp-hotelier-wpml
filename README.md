@@ -24,7 +24,7 @@ To translate a room, you just need to follow the same steps required to translat
 
 The idea is to create an exact copy of the room in each translation. Same price, rates and settings. That's because is the original room (the room created in the default language) the one is added to the cart, regardless of the language selected by the guest. So, each translation must have the same features.
 
-The easiest way to do this is click on the **"Overwrite with English content"** button (replace *English* with your default language):
+The easiest way to do this is clicking on the **"Overwrite with English content"** button (replace *English* with your default language):
 
 ![WPML overwrite button](https://d2salfytceyqoe.cloudfront.net/wp-content/uploads/2011/01/wpml-translating-a-post.png)
 
