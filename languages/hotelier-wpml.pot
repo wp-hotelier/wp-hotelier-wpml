@@ -19,14 +19,14 @@ msgstr ""
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
-#: ../hotelier-wpml.php:156
+#: ../hotelier-wpml.php:159
 msgid "WP Hotelier Multilingual plugin is enabled but not effective. It requires %s and %s plugins in order to work."
 msgstr ""
 
-#: ../hotelier-wpml.php:286
+#: ../hotelier-wpml.php:289
 msgid "Translation not available"
 msgstr ""
 
-#: ../hotelier-wpml.php:295
+#: ../hotelier-wpml.php:298
 msgid "You need to insert the shortcode also in the translated pages."
 msgstr ""
