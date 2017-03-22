@@ -3,7 +3,7 @@
  * Plugin Name:       WP Hotelier Multilingual
  * Plugin URI:        http://wphotelier.com/
  * Description:       Run a multilingual website with Hotelier and WPML.
- * Version:           0.9.1
+ * Version:           0.9.2
  * Author:            Hotelier
  * Author URI:        http://wphotelier.com/
  * Requires at least: 4.0
@@ -27,7 +27,7 @@ final class Hotelier_WPML {
 	/**
 	 * @var string
 	 */
-	public $version = '0.9.1';
+	public $version = '0.9.2';
 
 	/**
 	 * @var Hotelier_WPML The single instance of the class
@@ -147,6 +147,9 @@ final class Hotelier_WPML {
 		// Delete room IDs transient during room trash and room save
 		add_action( 'wp_trash_post', array( $this, 'trash_room' ) );
 		add_action( 'publish_room', array( $this, 'new_room' ) );
+
+		// Add WPML fields in room search widget
+		add_action( 'hotelier_after_widget_room_search_fields', array( $this, 'add_widget_fields' ) );
 	}
 
 	/**
@@ -460,6 +463,13 @@ final class Hotelier_WPML {
 	 */
 	public function new_room() {
 		delete_transient( 'hotelier_wpml_room_ids_default_lang' );
+	}
+
+	/**
+	 * Add WPML fields in room search widget
+	 */
+	public function add_widget_fields() {
+		do_action( 'wpml_add_language_form_field' );
 	}
 }
 
