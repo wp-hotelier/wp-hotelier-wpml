@@ -2,7 +2,7 @@
 Contributors: wphotelier, benitolopez
 Tags: hotel, booking, hostel, reservations, b&b, rooms, hotelier, wpml, multilingual
 Requires at least: 4.1
-Tested up to: 4.7.3
+Tested up to: 4.8
 
 Run a multilingual website with Hotelier and WPML.
 
