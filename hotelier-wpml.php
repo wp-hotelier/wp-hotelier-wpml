@@ -2,9 +2,9 @@
 /**
  * Plugin Name:       WP Hotelier Multilingual
  * Plugin URI:        http://wphotelier.com/
- * Description:       Run a multilingual website with Hotelier and WPML.
+ * Description:       Run a multilingual website with WP Hotelier and WPML.
  * Version:           1.0.0
- * Author:            Hotelier
+ * Author:            WP Hotelier
  * Author URI:        http://wphotelier.com/
  * Requires at least: 4.0
  * Tested up to:      4.7.3
