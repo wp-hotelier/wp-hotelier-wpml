@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name:       WP Hotelier Multilingual
+ * Plugin Name:       Easy WP Hotelier Multilingual
  * Plugin URI:        http://wphotelier.com/
- * Description:       Run a multilingual website with WP Hotelier and WPML.
+ * Description:       Run a multilingual website with Easy WP Hotelier and WPML.
  * Version:           1.0.0
- * Author:            WP Hotelier
+ * Author:            Easy WP Hotelier
  * Author URI:        http://wphotelier.com/
  * Requires at least: 4.0
  * Tested up to:      4.7.3
@@ -156,9 +156,9 @@ final class Hotelier_WPML {
 	 * Show info when WPML and/or Hotelier are not installed .
 	 */
 	public function error_no_plugins() {
-		$message = __( 'WP Hotelier Multilingual plugin is enabled but not effective. It requires %s and %s plugins in order to work.', 'hotelier-wpml' );
+		$message = __( 'Easy WP Hotelier Multilingual plugin is enabled but not effective. It requires %s and %s plugins in order to work.', 'hotelier-wpml' );
 
-		echo '<div class="error"><p>' . sprintf( $message, '<a href="http://wpml.org/">WPML</a>', '<a href="http://wphotelier.com/">WP Hotelier</a>' ) . '</p></div>';
+		echo '<div class="error"><p>' . sprintf( $message, '<a href="http://wpml.org/">WPML</a>', '<a href="https://wphotelier.com/">Easy WP Hotelier</a>' ) . '</p></div>';
 	}
 
 	/**
