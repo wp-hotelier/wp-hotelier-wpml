@@ -8,7 +8,7 @@
  * Author URI:        http://wphotelier.com/
  * Requires at least: 4.0
  * Tested up to:      4.7.3
- * Text Domain:       hotelier-wpml
+ * Text Domain:       wp-hotelier-wpml
  * Domain Path:       languages
  *
  */
@@ -54,14 +54,14 @@ final class Hotelier_WPML {
 	 * Cloning is forbidden.
 	 */
 	public function __clone() {
-		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'hotelier-wpml' ), '0.9.0' );
+		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'wp-hotelier-wpml' ), '0.9.0' );
 	}
 
 	/**
 	 * Unserializing instances of this class is forbidden.
 	 */
 	public function __wakeup() {
-		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'hotelier-wpml' ), '0.9.0' );
+		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'wp-hotelier-wpml' ), '0.9.0' );
 	}
 
 	/**
@@ -156,7 +156,7 @@ final class Hotelier_WPML {
 	 * Show info when WPML and/or Hotelier are not installed .
 	 */
 	public function error_no_plugins() {
-		$message = __( 'Easy WP Hotelier Multilingual plugin is enabled but not effective. It requires %s and %s plugins in order to work.', 'hotelier-wpml' );
+		$message = __( 'Easy WP Hotelier Multilingual plugin is enabled but not effective. It requires %s and %s plugins in order to work.', 'wp-hotelier-wpml' );
 
 		echo '<div class="error"><p>' . sprintf( $message, '<a href="http://wpml.org/">WPML</a>', '<a href="https://wphotelier.com/">Easy WP Hotelier</a>' ) . '</p></div>';
 	}
@@ -173,22 +173,22 @@ final class Hotelier_WPML {
 		$hotelier_wpml_lang_dir = apply_filters( 'hotelier_wpml_languages_directory', $hotelier_wpml_lang_dir );
 
 		// Traditional WordPress plugin locale filter
-		$locale = apply_filters( 'plugin_locale', get_locale(), 'hotelier-wpml' );
-		$mofile = sprintf( '%1$s-%2$s.mo', 'hotelier-wpml', $locale );
+		$locale = apply_filters( 'plugin_locale', get_locale(), 'wp-hotelier-wpml' );
+		$mofile = sprintf( '%1$s-%2$s.mo', 'wp-hotelier-wpml', $locale );
 
 		// Setup paths to current locale file
 		$mofile_local  = $hotelier_wpml_lang_dir . $mofile;
-		$mofile_global = WP_LANG_DIR . '/hotelier-wpml/' . $mofile;
+		$mofile_global = WP_LANG_DIR . '/wp-hotelier-wpml/' . $mofile;
 
 		if ( file_exists( $mofile_global ) ) {
-			// Look in global /wp-content/languages/hotelier-wpml folder
-			load_textdomain( 'hotelier-wpml', $mofile_global );
+			// Look in global /wp-content/languages/wp-hotelier-wpml folder
+			load_textdomain( 'wp-hotelier-wpml', $mofile_global );
 		} elseif ( file_exists( $mofile_local ) ) {
-			// Look in local /wp-content/plugins/hotelier-wpml/languages/ folder
-			load_textdomain( 'hotelier-wpml', $mofile_local );
+			// Look in local /wp-content/plugins/wp-hotelier-wpml/languages/ folder
+			load_textdomain( 'wp-hotelier-wpml', $mofile_local );
 		} else {
 			// Load the default language files
-			load_plugin_textdomain( 'hotelier-wpml', false, $hotelier_wpml_lang_dir );
+			load_plugin_textdomain( 'wp-hotelier-wpml', false, $hotelier_wpml_lang_dir );
 		}
 	}
 
@@ -286,7 +286,7 @@ final class Hotelier_WPML {
 				if ( is_array( $translations ) && isset( $translations[ $code ] ) ) {
 					$html .= '<select><option>' . esc_html( $translations[ $lang[ 'code' ] ]->post_title ) . '</option></select>';
 				} else {
-					$html .= '<span class="hotelier-wpml-lang-error">' . esc_html__( 'Translation not available', 'hotelier-wpml' ) . '</span>';
+					$html .= '<span class="hotelier-wpml-lang-error">' . esc_html__( 'Translation not available', 'wp-hotelier-wpml' ) . '</span>';
 				}
 
 				$html .= '</div>';
@@ -295,7 +295,7 @@ final class Hotelier_WPML {
 			$html .= '<label for="hotelier_settings[' . esc_attr( $args[ 'id' ] ) . ']"> '  . wp_kses_post( $args[ 'desc' ] );
 
 			if ( 'listing_page' == $args[ 'id' ] || 'booking_page' == $args[ 'id' ] ) {
-				$html .= ' ' . esc_html__( 'You need to insert the shortcode also in the translated pages.', 'hotelier-wpml' );
+				$html .= ' ' . esc_html__( 'You need to insert the shortcode also in the translated pages.', 'wp-hotelier-wpml' );
 			}
 
 			$html .= '</label>';
