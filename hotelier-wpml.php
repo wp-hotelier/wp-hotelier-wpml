@@ -150,6 +150,14 @@ final class Hotelier_WPML {
 
 		// Add WPML fields in room search widget
 		add_action( 'hotelier_after_widget_room_search_fields', array( $this, 'add_widget_fields' ) );
+
+		// Check each translation on the listing page to see if the original room is available
+		// add_filter( 'hotelier_get_available_room_ids', array( $this, 'get_available_room_ids' ), 10, 3 );
+		//
+		// Check if the room is available (listing page)
+		add_filter( 'hotelier_room_is_available', array( $this, 'is_available' ), 10, 4 );
+
+
 	}
 
 	/**
@@ -446,6 +454,35 @@ final class Hotelier_WPML {
 		set_transient( 'hotelier_wpml_room_ids_default_lang', $rooms, DAY_IN_SECONDS * 30 );
 
 		return $rooms;
+	}
+
+	// Check if the original room is available (listing page)
+	public function is_available( $is_available, $room_id, $checkin, $checkout ) {
+		// First, check if this is a translation
+		global $sitepress;
+
+		$default_lang = $sitepress->get_default_language();
+		$curr_lang    = ICL_LANGUAGE_CODE;
+
+		if ( $curr_lang != $default_lang ) {
+			$id = icl_object_id( $room_id, 'room', false, $default_lang );
+
+			if ( $id ) {
+				$_room = htl_get_room( $id );
+
+				// Unhook this function so it doesn't loop infinitely
+				remove_filter( 'hotelier_room_is_available', array( $this, 'is_available' ), 10, 4 );
+
+				if ( ! $_room->is_available( $checkin, $checkout ) ) {
+					$is_available = false;
+				}
+
+				// Re-hook this function
+				add_filter( 'hotelier_room_is_available', array( $this, 'is_available' ), 10, 4 );
+			}
+		}
+
+		return $is_available;
 	}
 
 	/**
