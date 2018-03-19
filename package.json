@@ -1,7 +1,7 @@
 {
 	"name": "wp-hotelier-wpml",
 	"description": "Integrate WPML with Easy WP Hotelier.",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"homepage": "https://wphotelier.com/",
 	"author": "Benito Lopez http://lopezb.com/",
 	"scripts": {
