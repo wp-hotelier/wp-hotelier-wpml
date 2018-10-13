@@ -3,7 +3,7 @@
  * Plugin Name:       Easy WP Hotelier Multilingual
  * Plugin URI:        http://wphotelier.com/
  * Description:       Run a multilingual website with Easy WP Hotelier and WPML.
- * Version:           1.2.1
+ * Version:           1.2.2
  * Author:            Easy WP Hotelier
  * Author URI:        http://wphotelier.com/
  * Requires at least: 4.0
@@ -27,7 +27,7 @@ final class Hotelier_WPML {
 	/**
 	 * @var string
 	 */
-	public $version = '1.2.1';
+	public $version = '1.2.2';
 
 	/**
 	 * @var Hotelier_WPML The single instance of the class
