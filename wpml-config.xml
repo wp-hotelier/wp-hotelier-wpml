@@ -47,6 +47,8 @@
 			<key name="emails_cancelled_reservation_heading" />
 			<key name="emails_guest_cancelled_reservation_subject" />
 			<key name="emails_guest_cancelled_reservation_heading" />
+			<key name="privacy_settings_snippet" />
+
 		</key>
 	</admin-texts>
 <wpml-config>
