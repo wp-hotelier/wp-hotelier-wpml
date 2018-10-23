@@ -3,7 +3,7 @@
  * Plugin Name:       Easy WP Hotelier Multilingual
  * Plugin URI:        http://wphotelier.com/
  * Description:       Run a multilingual website with Easy WP Hotelier and WPML.
- * Version:           1.2.2
+ * Version:           1.2.3
  * Author:            Easy WP Hotelier
  * Author URI:        http://wphotelier.com/
  * Requires at least: 4.0
@@ -27,7 +27,7 @@ final class Hotelier_WPML {
 	/**
 	 * @var string
 	 */
-	public $version = '1.2.2';
+	public $version = '1.2.3';
 
 	/**
 	 * @var Hotelier_WPML The single instance of the class
@@ -151,13 +151,12 @@ final class Hotelier_WPML {
 		// Add WPML fields in room search widget
 		add_action( 'hotelier_after_widget_room_search_fields', array( $this, 'add_widget_fields' ) );
 
-		// Check each translation on the listing page to see if the original room is available
-		// add_filter( 'hotelier_get_available_room_ids', array( $this, 'get_available_room_ids' ), 10, 3 );
-		//
 		// Check if the room is available (listing page)
 		add_filter( 'hotelier_room_is_available', array( $this, 'is_available' ), 10, 4 );
 
-
+		// When calculating the dates to disable on the datepicker, pass the original room ID
+		add_action( 'hotelier_get_room_id_for_unavailable_days_on_datepicker', array( $this, 'get_room_id_for_unavailable_days_on_datepicker' ) );
+		add_action( 'hotelier_get_room_ids_for_unavailable_days_on_datepicker', array( $this, 'get_room_ids_for_unavailable_days_on_datepicker' ) );
 	}
 
 	/**
@@ -456,7 +455,9 @@ final class Hotelier_WPML {
 		return $rooms;
 	}
 
-	// Check if the original room is available (listing page)
+	/**
+	 * Check if the original room is available (listing page)
+	 */
 	public function is_available( $is_available, $room_id, $checkin, $checkout ) {
 		// First, check if this is a translation
 		global $sitepress;
@@ -483,6 +484,34 @@ final class Hotelier_WPML {
 		}
 
 		return $is_available;
+	}
+
+	/**
+	 * When calculating the dates to disable on the datepicker, pass the original room ID
+	 */
+	public function get_room_id_for_unavailable_days_on_datepicker( $room_id ) {
+		global $sitepress;
+
+		$default_lang = $sitepress->get_default_language();
+		$curr_lang    = ICL_LANGUAGE_CODE;
+
+		if ( $curr_lang != $default_lang ) {
+			$room_id = icl_object_id( $room_id, 'room', false, $default_lang );
+
+			if ( $room_id  ) {
+				return $room_id;
+			}
+		}
+
+		return $room_id;
+	}
+
+	/**
+	 * When calculating the dates to disable on the datepicker,
+	 * remove trasnalations from the room IDs array
+	 */
+	public function get_room_ids_for_unavailable_days_on_datepicker( $room_id ) {
+		return $this->get_room_ids_for_reservations();
 	}
 
 	/**
