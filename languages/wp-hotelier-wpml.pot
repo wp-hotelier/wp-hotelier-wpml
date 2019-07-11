@@ -1,4 +1,4 @@
-# Copyright (C) 2018 Easy WP Hotelier Multilingual
+# Copyright (C) 2019 Easy WP Hotelier Multilingual
 # This file is distributed under the same license as the Easy WP Hotelier Multilingual package.
 msgid ""
 msgstr ""
@@ -23,10 +23,10 @@ msgstr ""
 msgid "Easy WP Hotelier Multilingual plugin is enabled but not effective. It requires %s and %s plugins in order to work."
 msgstr ""
 
-#: ../hotelier-wpml.php:296
+#: ../hotelier-wpml.php:312
 msgid "Translation not available"
 msgstr ""
 
-#: ../hotelier-wpml.php:305
+#: ../hotelier-wpml.php:322
 msgid "You need to insert the shortcode also in the translated pages."
 msgstr ""
