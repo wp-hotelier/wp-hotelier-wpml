@@ -2,6 +2,8 @@
 
 This extension lets you run a multilingual website with the [Easy WP Hotelier - WordPress Booking Plugin](https://wphotelier.com/) and WPML. This is a glue plugin, that uses hooks in both Easy WP Hotelier and [WPML](https://wpml.org/).
 
+Requires Easy WP Hotelier **2.0.0** or above.
+
 ## Scope of this plugin
 
 This a very basic and **not supported** integration between Easy WP Hotelier and WPML. The main function of this plugin is the synchronization of the stock of the rooms between different languages. WPML creates a new room for each translation (with a different ID), so we must have a function that synchronizes the stock.
