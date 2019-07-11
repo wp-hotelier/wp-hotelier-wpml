@@ -111,6 +111,11 @@ final class Hotelier_WPML {
 	 * Hook into actions and filters
 	 */
 	public function init() {
+		if ( defined( 'HTL_VERSION' ) && version_compare( HTL_VERSION, '2.0.0', '<' ) ) {
+			// Add notice for old Easy WP Hotelier versions
+			add_action( 'admin_notices', array( $this, 'show_notice_for_old_version' ) );
+		}
+
 		// Check if WPML and Hotelier are installed
 		if ( ! defined( 'ICL_SITEPRESS_VERSION' ) || ! defined( 'HTL_VERSION' ) ) {
 			add_action( 'admin_notices', array( $this, 'error_no_plugins' ) );
@@ -555,6 +560,13 @@ final class Hotelier_WPML {
 	 */
 	public function add_widget_fields() {
 		do_action( 'wpml_add_language_form_field' );
+	}
+
+	/**
+	 * Show notice for old Easy WP Hotelier versions.
+	 */
+	public function show_notice_for_old_version() {
+		echo '<div class="error"><p>' . sprintf( wp_kses( __( 'This version of <strong>Easy WP Hotelier Multilingual</strong> requires at least <strong>Easy WP Hotelier 2.0.0</strong> to work correctly. Please <a href="%s">update Easy WP Hotelier</a> before to continue. An old version of Easy WP Hotelier may cause some issues.', 'wp-hotelier-wpml' ), array( 'strong' => array(), 'a' => array( 'href' => array() ) ) ), admin_url( 'plugins.php?plugin_status=upgrade' ) ) . '</p></div>';
 	}
 }
 

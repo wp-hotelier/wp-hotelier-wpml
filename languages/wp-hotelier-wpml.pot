@@ -19,14 +19,18 @@ msgstr ""
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
-#: ../hotelier-wpml.php:166
+#: ../hotelier-wpml.php:171
 msgid "Easy WP Hotelier Multilingual plugin is enabled but not effective. It requires %s and %s plugins in order to work."
 msgstr ""
 
-#: ../hotelier-wpml.php:312
+#: ../hotelier-wpml.php:317
 msgid "Translation not available"
 msgstr ""
 
-#: ../hotelier-wpml.php:322
+#: ../hotelier-wpml.php:327
 msgid "You need to insert the shortcode also in the translated pages."
+msgstr ""
+
+#: ../hotelier-wpml.php:569
+msgid "This version of <strong>Easy WP Hotelier Multilingual</strong> requires at least <strong>Easy WP Hotelier 2.0.0</strong> to work correctly. Please <a href=\"%s\">update Easy WP Hotelier</a> before to continue. An old version of Easy WP Hotelier may cause some issues."
 msgstr ""
