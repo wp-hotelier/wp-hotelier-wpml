@@ -7,7 +7,7 @@
  * Author:            Easy WP Hotelier
  * Author URI:        http://wphotelier.com/
  * Requires at least: 4.0
- * Tested up to:      4.7.3
+ * Tested up to:      5.2
  * Text Domain:       wp-hotelier-wpml
  * Domain Path:       languages
  *
