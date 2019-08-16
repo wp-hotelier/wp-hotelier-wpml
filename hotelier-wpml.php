@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name:       Easy WP Hotelier Multilingual
+ * Plugin Name:       WP Hotelier Multilingual
  * Plugin URI:        http://wphotelier.com/
- * Description:       Run a multilingual website with Easy WP Hotelier and WPML.
+ * Description:       Run a multilingual website with WP Hotelier and WPML.
  * Version:           1.3.0
- * Author:            Easy WP Hotelier
+ * Author:            WP Hotelier
  * Author URI:        http://wphotelier.com/
  * Requires at least: 4.0
  * Tested up to:      5.2
@@ -112,7 +112,7 @@ final class Hotelier_WPML {
 	 */
 	public function init() {
 		if ( defined( 'HTL_VERSION' ) && version_compare( HTL_VERSION, '2.0.0', '<' ) ) {
-			// Add notice for old Easy WP Hotelier versions
+			// Add notice for old WP Hotelier versions
 			add_action( 'admin_notices', array( $this, 'show_notice_for_old_version' ) );
 		}
 
@@ -168,9 +168,9 @@ final class Hotelier_WPML {
 	 * Show info when WPML and/or Hotelier are not installed .
 	 */
 	public function error_no_plugins() {
-		$message = __( 'Easy WP Hotelier Multilingual plugin is enabled but not effective. It requires %s and %s plugins in order to work.', 'wp-hotelier-wpml' );
+		$message = __( 'WP Hotelier Multilingual plugin is enabled but not effective. It requires %s and %s plugins in order to work.', 'wp-hotelier-wpml' );
 
-		echo '<div class="error"><p>' . sprintf( $message, '<a href="http://wpml.org/">WPML</a>', '<a href="https://wphotelier.com/">Easy WP Hotelier</a>' ) . '</p></div>';
+		echo '<div class="error"><p>' . sprintf( $message, '<a href="http://wpml.org/">WPML</a>', '<a href="https://wphotelier.com/">WP Hotelier</a>' ) . '</p></div>';
 	}
 
 	/**
@@ -563,10 +563,10 @@ final class Hotelier_WPML {
 	}
 
 	/**
-	 * Show notice for old Easy WP Hotelier versions.
+	 * Show notice for old WP Hotelier versions.
 	 */
 	public function show_notice_for_old_version() {
-		echo '<div class="error"><p>' . sprintf( wp_kses( __( 'This version of <strong>Easy WP Hotelier Multilingual</strong> requires at least <strong>Easy WP Hotelier 2.0.0</strong> to work correctly. Please <a href="%s">update Easy WP Hotelier</a> before to continue. An old version of Easy WP Hotelier may cause some issues.', 'wp-hotelier-wpml' ), array( 'strong' => array(), 'a' => array( 'href' => array() ) ) ), admin_url( 'plugins.php?plugin_status=upgrade' ) ) . '</p></div>';
+		echo '<div class="error"><p>' . sprintf( wp_kses( __( 'This version of <strong>WP Hotelier Multilingual</strong> requires at least <strong>WP Hotelier 2.0.0</strong> to work correctly. Please <a href="%s">update WP Hotelier</a> before to continue. An old version of WP Hotelier may cause some issues.', 'wp-hotelier-wpml' ), array( 'strong' => array(), 'a' => array( 'href' => array() ) ) ), admin_url( 'plugins.php?plugin_status=upgrade' ) ) . '</p></div>';
 	}
 }
 
