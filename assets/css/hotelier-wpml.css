@@ -1,20 +1,16 @@
 .hotelier-wpml-lang-row {
-	padding: .6em 0;
-}
-
-.hotelier-wpml-lang-row:last-of-type {
-	margin-bottom: 1em;
+	margin-bottom: 18px;
 }
 
 .hotelier-wpml-lang-label {
 	display: inline-block;
-	font-size: 11px;
-	font-weight: bold;
-	width: 120px;
+	font-size: 12px;
+	font-weight: 600;
+	width: 100px;
 }
 
 .hotelier-wpml-lang-error {
-	font-style: italic;
-	color: red;
+	color: #ED4248;
 	font-size: 13px;
+	font-weight: 500;
 }

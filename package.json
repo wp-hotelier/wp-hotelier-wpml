@@ -1,11 +1,11 @@
 {
 	"name": "wp-hotelier-wpml",
-	"description": "Integrate WPML with Easy WP Hotelier.",
-	"version": "1.2.3",
+	"description": "Integrate WPML with WP Hotelier.",
+	"version": "1.3.0",
 	"homepage": "https://wphotelier.com/",
 	"author": "Benito Lopez http://lopezb.com/",
 	"scripts": {
-		"run:pot": "rm -rf dist; wp-pot --src '**/*.php' --dest-file languages/wp-hotelier-wpml.pot --domain wp-hotelier-wpml --package 'Easy WP Hotelier Multilingual' --bug-report https://wphotelier.com --team 'Easy WP Hotelier <support@wphotelier.com>'",
+		"run:pot": "rm -rf dist; wp-pot --src '**/*.php' --dest-file languages/wp-hotelier-wpml.pot --domain wp-hotelier-wpml --package 'WP Hotelier Multilingual' --bug-report https://wphotelier.com --team 'WP Hotelier <support@wphotelier.com>'",
 		"run:sync": "rsync -azP -e \"ssh -p ${npm_config_P_SSHPORT}\" --delete --exclude='package.json' --exclude='.*/' --exclude='.*' --exclude='node_modules/' --exclude='dist/' . \"${npm_config_P_SYNCDEST}\"",
 		"build:pot": "onchange '**/*.php' -i -w -- npm run run:pot",
 		"sync": "onchange '**/*' -e 'dist' -e '.git' -e 'languages' -w -- npm run run:sync",

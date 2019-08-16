@@ -1,13 +1,13 @@
 <?php
 /**
- * Plugin Name:       Easy WP Hotelier Multilingual
+ * Plugin Name:       WP Hotelier Multilingual
  * Plugin URI:        http://wphotelier.com/
- * Description:       Run a multilingual website with Easy WP Hotelier and WPML.
- * Version:           1.2.3
- * Author:            Easy WP Hotelier
+ * Description:       Run a multilingual website with WP Hotelier and WPML.
+ * Version:           1.3.0
+ * Author:            WP Hotelier
  * Author URI:        http://wphotelier.com/
  * Requires at least: 4.0
- * Tested up to:      4.7.3
+ * Tested up to:      5.2
  * Text Domain:       wp-hotelier-wpml
  * Domain Path:       languages
  *
@@ -27,7 +27,7 @@ final class Hotelier_WPML {
 	/**
 	 * @var string
 	 */
-	public $version = '1.2.3';
+	public $version = '1.3.0';
 
 	/**
 	 * @var Hotelier_WPML The single instance of the class
@@ -111,6 +111,11 @@ final class Hotelier_WPML {
 	 * Hook into actions and filters
 	 */
 	public function init() {
+		if ( defined( 'HTL_VERSION' ) && version_compare( HTL_VERSION, '2.0.0', '<' ) ) {
+			// Add notice for old WP Hotelier versions
+			add_action( 'admin_notices', array( $this, 'show_notice_for_old_version' ) );
+		}
+
 		// Check if WPML and Hotelier are installed
 		if ( ! defined( 'ICL_SITEPRESS_VERSION' ) || ! defined( 'HTL_VERSION' ) ) {
 			add_action( 'admin_notices', array( $this, 'error_no_plugins' ) );
@@ -163,9 +168,9 @@ final class Hotelier_WPML {
 	 * Show info when WPML and/or Hotelier are not installed .
 	 */
 	public function error_no_plugins() {
-		$message = __( 'Easy WP Hotelier Multilingual plugin is enabled but not effective. It requires %s and %s plugins in order to work.', 'wp-hotelier-wpml' );
+		$message = __( 'WP Hotelier Multilingual plugin is enabled but not effective. It requires %s and %s plugins in order to work.', 'wp-hotelier-wpml' );
 
-		echo '<div class="error"><p>' . sprintf( $message, '<a href="http://wpml.org/">WPML</a>', '<a href="https://wphotelier.com/">Easy WP Hotelier</a>' ) . '</p></div>';
+		echo '<div class="error"><p>' . sprintf( $message, '<a href="http://wpml.org/">WPML</a>', '<a href="https://wphotelier.com/">WP Hotelier</a>' ) . '</p></div>';
 	}
 
 	/**
@@ -255,60 +260,79 @@ final class Hotelier_WPML {
 	 */
 	public function add_page_settings( $html, $args, $value ) {
 		if ( isset( $args[ 'id' ] ) && ( 'listing_page' == $args[ 'id' ] || 'booking_page' == $args[ 'id' ] || 'terms_page' == $args[ 'id' ] ) ) {
-			global $sitepress;
-
-			$options = $this->get_pages_default_language();
-			$default_lang = $sitepress->get_default_language();
-
-			$html = '<div class="hotelier-wpml-lang-row">';
-
-			$html .= '<span class="hotelier-wpml-lang-label">[ ' . ( $this->get_language_name( $default_lang ) ) . ' ] </span>';
-
-			$html .= '<select id="hotelier_settings[' . esc_attr( $args[ 'id' ] ) . ']" name="hotelier_settings[' . esc_attr( $args[ 'id' ] ) . ']">';
-
-			foreach ( $options as $option => $name ) {
-				$selected = selected( $option, $value, false );
-				$html .= '<option value="' . esc_attr( $option ) . '" ' . $selected . '>' . esc_html( $name ) . '</option>';
-			}
-
-			$html .= '</select>';
-
-			$html .= '</div>';
-
-			$get_page_translations = $sitepress->get_element_trid( $value, 'post_page' );
-			$translations = $sitepress->get_element_translations( $get_page_translations, 'post_page', false, true );
-
-			$active_languages = $sitepress->get_active_languages();
-
-			foreach ( $active_languages as $code => $lang ) {
-
-				if ( $code == $default_lang ) {
-					continue;
-				}
-
-				$html .= '<div class="hotelier-wpml-lang-row">';
-
-				$html .= '<span class="hotelier-wpml-lang-label">[ ' . ( $this->get_language_name( $code ) ) . ' ] </span>';
-
-				if ( is_array( $translations ) && isset( $translations[ $code ] ) ) {
-					$html .= '<select><option>' . esc_html( $translations[ $lang[ 'code' ] ]->post_title ) . '</option></select>';
-				} else {
-					$html .= '<span class="hotelier-wpml-lang-error">' . esc_html__( 'Translation not available', 'wp-hotelier-wpml' ) . '</span>';
-				}
-
-				$html .= '</div>';
-			}
-
-			$html .= '<label for="hotelier_settings[' . esc_attr( $args[ 'id' ] ) . ']"> '  . wp_kses_post( $args[ 'desc' ] );
-
-			if ( 'listing_page' == $args[ 'id' ] || 'booking_page' == $args[ 'id' ] ) {
-				$html .= ' ' . esc_html__( 'You need to insert the shortcode also in the translated pages.', 'wp-hotelier-wpml' );
-			}
-
-			$html .= '</label>';
+			$html = $this->print_wpml_select( $args, $value );
 		}
 
 		return $html;
+	}
+
+	// Print WPML select field
+	public function print_wpml_select( $args, $value ) {
+		global $sitepress;
+
+		$options      = $this->get_pages_default_language();
+		$default_lang = $sitepress->get_default_language();
+		$size         = ( isset( $args[ 'size' ] ) && ! is_null( $args[ 'size' ] ) ) ? 'htl-ui-input--' . $args[ 'size' ] : '';
+
+		ob_start();
+		?>
+
+		<div class="htl-ui-setting htl-ui-setting--select htl-ui-setting--<?php echo esc_attr( $args[ 'id' ] ); ?>">
+			<div class="hotelier-wpml-lang-row">
+				<span class="hotelier-wpml-lang-label">[ <?php echo $this->get_language_name( $default_lang ); ?> ]</span>
+
+				<select class="<?php echo esc_attr( $size ); ?> htl-ui-input htl-ui-input--select" id="hotelier_settings[<?php echo esc_attr( $args[ 'id' ] ); ?>]" name="hotelier_settings[<?php echo esc_attr( $args[ 'id' ] ); ?>]">
+					<?php foreach ( $args[ 'options' ] as $option => $name ) : ?>
+						<?php $selected = selected( $option, $value, false ); ?>
+
+						<option value="<?php echo esc_attr( $option ); ?>" <?php echo $selected ?>><?php echo esc_html( $name ); ?></option>
+					<?php endforeach; ?>
+
+				</select>
+			</div>
+
+			<?php
+			$get_page_translations = $sitepress->get_element_trid( $value, 'post_page' );
+			$translations          = $sitepress->get_element_translations( $get_page_translations, 'post_page', false, true );
+			$active_languages      = $sitepress->get_active_languages();
+			?>
+
+			<?php foreach ( $active_languages as $code => $lang ) : ?>
+
+				<?php
+				if ( $code == $default_lang ) {
+					continue;
+				}
+				?>
+
+				<div class="hotelier-wpml-lang-row">
+
+					<span class="hotelier-wpml-lang-label">[ <?php echo $this->get_language_name( $code ); ?> ]</span>
+
+					<?php if ( is_array( $translations ) && isset( $translations[ $code ] ) ) : ?>
+						<select class="<?php echo esc_attr( $size ); ?> htl-ui-input htl-ui-input--select">
+							<option><?php echo esc_html( $translations[ $lang[ 'code' ] ]->post_title ); ?></option>
+						</select>
+					<?php else : ?>
+						<span class="hotelier-wpml-lang-error"><?php esc_html_e( 'Translation not available', 'wp-hotelier-wpml' ); ?></span>
+					<?php endif; ?>
+
+				</div>
+
+			<?php endforeach; ?>
+
+			<?php if ( $args[ 'desc' ] ) : ?>
+				<?php
+				if ( 'listing_page' == $args[ 'id' ] || 'booking_page' == $args[ 'id' ] ) {
+					$args[ 'desc' ] .= ' ' . esc_html__( 'You need to insert the shortcode also in the translated pages.', 'wp-hotelier-wpml' );
+				}
+				?>
+				<label class="htl-ui-label htl-ui-label--text htl-ui-setting__description htl-ui-setting__description--select htl-ui-setting__description--<?php echo esc_attr( $args[ 'id' ] ); ?>"><?php echo wp_kses_post( $args[ 'desc' ] ); ?></label>
+			<?php endif; ?>
+		</div>
+
+		<?php
+		return ob_get_clean();
 	}
 
 	// Add to the cart the original room instead of the translated one
@@ -536,6 +560,13 @@ final class Hotelier_WPML {
 	 */
 	public function add_widget_fields() {
 		do_action( 'wpml_add_language_form_field' );
+	}
+
+	/**
+	 * Show notice for old WP Hotelier versions.
+	 */
+	public function show_notice_for_old_version() {
+		echo '<div class="error"><p>' . sprintf( wp_kses( __( 'This version of <strong>WP Hotelier Multilingual</strong> requires at least <strong>WP Hotelier 2.0.0</strong> to work correctly. Please <a href="%s">update WP Hotelier</a> before to continue. An old version of WP Hotelier may cause some issues.', 'wp-hotelier-wpml' ), array( 'strong' => array(), 'a' => array( 'href' => array() ) ) ), admin_url( 'plugins.php?plugin_status=upgrade' ) ) . '</p></div>';
 	}
 }
 

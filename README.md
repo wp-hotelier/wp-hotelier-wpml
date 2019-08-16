@@ -1,18 +1,20 @@
-# Easy WP Hotelier Multilingual
+# WP Hotelier Multilingual
 
-This extension lets you run a multilingual website with the [Easy WP Hotelier - WordPress Booking Plugin](https://wphotelier.com/) and WPML. This is a glue plugin, that uses hooks in both Easy WP Hotelier and [WPML](https://wpml.org/).
+This extension lets you run a multilingual website with the [WP Hotelier - WordPress Booking Plugin](https://wphotelier.com/) and WPML. This is a glue plugin, that uses hooks in both WP Hotelier and [WPML](https://wpml.org/).
+
+Requires WP Hotelier **2.0.0** or above.
 
 ## Scope of this plugin
 
-This a very basic and **not supported** integration between Easy WP Hotelier and WPML. The main function of this plugin is the synchronization of the stock of the rooms between different languages. WPML creates a new room for each translation (with a different ID), so we must have a function that synchronizes the stock.
+This a very basic and **not supported** integration between WP Hotelier and WPML. The main function of this plugin is the synchronization of the stock of the rooms between different languages. WPML creates a new room for each translation (with a different ID), so we must have a function that synchronizes the stock.
 
 The extension includes also a ready to use language configuration file for WPML. But again, support is not provided for this plugin (or for WPML in general). You are free to extend or build a most complete solution.
 
-## Easy WP Hotelier and WPML: the workflow
+## WP Hotelier and WPML: the workflow
 
 The first step is read the [WPML documentation](https://wpml.org/documentation/).
 
-Easy WP Hotelier requires [two pages to work](http://docs.wphotelier.com/settings.html#hotelier-pages), the *listing* page and the *booking* page. You must create a translation for each of those pages and include the `[hotelier_listing]` and the `[hotelier_booking]` shortcodes (respectively) in the translated pages. In *Hotelier > Settings > Hotelier Pages* you can always check if the required pages were created and set correctly.
+WP Hotelier requires [two pages to work](http://docs.wphotelier.com/settings.html#hotelier-pages), the *listing* page and the *booking* page. You must create a translation for each of those pages and include the `[hotelier_listing]` and the `[hotelier_booking]` shortcodes (respectively) in the translated pages. In *Hotelier > Settings > Hotelier Pages* you can always check if the required pages were created and set correctly.
 
 Translate your room rates, room categories and room facilities. Those are simple taxonomies, so you can follow [this guide](https://wpml.org/documentation/getting-started-guide/translating-post-categories-and-custom-taxonomies/).
 
