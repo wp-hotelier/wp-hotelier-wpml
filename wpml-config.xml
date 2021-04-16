@@ -2,6 +2,7 @@
 	<custom-types>
 		<custom-type translate="1">room</custom-type>
 		<custom-type translate="0">room_reservation</custom-type>
+		<custom-type translate="0">coupon</custom-type>
 	</custom-types>
 	<taxonomies>
 		<taxonomy translate="1">room_cat</taxonomy>
