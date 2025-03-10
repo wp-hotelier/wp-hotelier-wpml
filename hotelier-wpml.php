@@ -3,7 +3,7 @@
  * Plugin Name:       WP Hotelier Multilingual
  * Plugin URI:        http://wphotelier.com/
  * Description:       Run a multilingual website with WP Hotelier and WPML.
- * Version:           1.4.0
+ * Version:           1.5.0
  * Author:            WP Hotelier
  * Author URI:        http://wphotelier.com/
  * Requires at least: 4.0
@@ -27,7 +27,7 @@ final class Hotelier_WPML {
 	/**
 	 * @var string
 	 */
-	public $version = '1.4.0';
+	public $version = '1.5.0';
 
 	/**
 	 * @var Hotelier_WPML The single instance of the class
@@ -149,9 +149,10 @@ final class Hotelier_WPML {
 		// Get room IDs in default language (used in the calendar page)
 		add_filter( 'hotelier_get_room_ids_for_reservations', array( $this, 'get_room_ids_for_reservations' ) );
 
-		// Delete room IDs transient during room trash and room save
-		add_action( 'wp_trash_post', array( $this, 'trash_room' ) );
+		// Delete room/extra IDs transient during room trash and room/extra save
+		add_action( 'wp_trash_post', array( $this, 'trash_post' ) );
 		add_action( 'publish_room', array( $this, 'new_room' ) );
+		add_action( 'publish_room', array( $this, 'new_extra' ) );
 
 		// Add WPML fields in room search widget
 		add_action( 'hotelier_after_widget_room_search_fields', array( $this, 'add_widget_fields' ) );
@@ -162,6 +163,9 @@ final class Hotelier_WPML {
 		// When calculating the dates to disable on the datepicker, pass the original room ID
 		add_action( 'hotelier_get_room_id_for_unavailable_days_on_datepicker', array( $this, 'get_room_id_for_unavailable_days_on_datepicker' ) );
 		add_action( 'hotelier_get_room_ids_for_unavailable_days_on_datepicker', array( $this, 'get_room_ids_for_unavailable_days_on_datepicker' ) );
+
+		// Extras integration
+		add_filter( 'hotelier_get_all_extras_ids', array( $this, 'get_all_extras_ids' ) );
 	}
 
 	/**
@@ -538,21 +542,67 @@ final class Hotelier_WPML {
 		return $this->get_room_ids_for_reservations();
 	}
 
+
+	/**
+	 * Get all extras IDs in default language
+	 */
+	public function get_all_extras_ids() {
+		// Load from cache
+		$extras_ids = get_transient( 'hotelier_wpml_extras_ids_default_lang' );
+
+		// Valid cache found
+		if ( false !== $extras_ids ) {
+			return $extras_ids;
+		}
+
+		// Switch to the default language
+		global $sitepress;
+		$sitepress->switch_lang( $sitepress->get_default_language() );
+
+		$extras = get_posts(
+			array(
+				'post_type'           => 'extra',
+				'post_status'         => 'publish',
+				'ignore_sticky_posts' => 1,
+				'posts_per_page'      => -1,
+				'fields'              => 'ids',
+				'orderby'             => 'menu_order',
+				'order'               => 'ASC',
+				'suppress_filters'    => 0,
+			)
+		);
+
+		// Switch back to the current language
+		$sitepress->switch_lang( ICL_LANGUAGE_CODE );
+
+		set_transient( 'hotelier_wpml_extras_ids_default_lang', $extras, DAY_IN_SECONDS * 30 );
+
+		return $extras;
+	}
+
 	/**
 	 * Delete transient when during room trash
 	 */
-	public function trash_room( $post_id ) {
+	public function trash_post( $post_id ) {
 		if ( get_post_type() === 'room' ) {
-
 			delete_transient( 'hotelier_wpml_room_ids_default_lang' );
+		} else if ( get_post_type() === 'extra' ) {
+			delete_transient( 'hotelier_wpml_extras_ids_default_lang' );
 		}
 	}
 
 	/**
-	 * Delete transient when during room save
+	 * Delete transient during room save
 	 */
 	public function new_room() {
 		delete_transient( 'hotelier_wpml_room_ids_default_lang' );
+	}
+
+	/**
+	 * Delete transient during room save
+	 */
+	public function new_extra() {
+		delete_transient( 'hotelier_wpml_extras_ids_default_lang' );
 	}
 
 	/**
