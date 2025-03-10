@@ -1,4 +1,4 @@
-# Copyright (C) 2019 WP Hotelier Multilingual
+# Copyright (C) 2025 WP Hotelier Multilingual
 # This file is distributed under the same license as the WP Hotelier Multilingual package.
 msgid ""
 msgstr ""
@@ -7,6 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: WP Hotelier <support@wphotelier.com>\n"
+"POT-Creation-Date: 2025-03-10 18:30+0000\n"
 "Report-Msgid-Bugs-To: https://wphotelier.com\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -19,18 +20,18 @@ msgstr ""
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
-#: ../hotelier-wpml.php:171
+#: ../hotelier-wpml.php:175
 msgid "WP Hotelier Multilingual plugin is enabled but not effective. It requires %s and %s plugins in order to work."
 msgstr ""
 
-#: ../hotelier-wpml.php:317
+#: ../hotelier-wpml.php:321
 msgid "Translation not available"
 msgstr ""
 
-#: ../hotelier-wpml.php:327
+#: ../hotelier-wpml.php:331
 msgid "You need to insert the shortcode also in the translated pages."
 msgstr ""
 
-#: ../hotelier-wpml.php:569
+#: ../hotelier-wpml.php:619
 msgid "This version of <strong>WP Hotelier Multilingual</strong> requires at least <strong>WP Hotelier 2.0.0</strong> to work correctly. Please <a href=\"%s\">update WP Hotelier</a> before to continue. An old version of WP Hotelier may cause some issues."
 msgstr ""
