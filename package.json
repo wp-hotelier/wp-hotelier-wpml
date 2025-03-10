@@ -7,8 +7,8 @@
 	"scripts": {
 		"run:pot": "rm -rf dist; wp-pot --src '**/*.php' --dest-file languages/wp-hotelier-wpml.pot --domain wp-hotelier-wpml --package 'WP Hotelier Multilingual' --bug-report https://wphotelier.com --team 'WP Hotelier <support@wphotelier.com>'",
 		"run:sync": "rsync -azP -e \"ssh -p ${npm_config_P_SSHPORT}\" --delete --exclude='package.json' --exclude='.*/' --exclude='.*' --exclude='node_modules/' --exclude='dist/' . \"${npm_config_P_SYNCDEST}\"",
-		"build:pot": "onchange '**/*.php' -i -w -- npm run run:pot",
-		"sync": "onchange '**/*' -e 'dist' -e '.git' -e 'languages' -w -- npm run run:sync",
+		"build:pot": "onchange '**/*.php' -i -- npm run run:pot",
+		"sync": "onchange '**/*' -e 'dist' -e '.git' -e 'languages' -- npm run run:sync",
 		"dirs": "mkdir -p languages; touch languages/wp-hotelier-wpml.pot;",
 		"zip": "rsync -azP -e --delete --exclude='package.json' --exclude='.*/' --exclude='.*' --exclude='node_modules/' --exclude='dist/' . dist/wp-hotelier-wpml; cd dist; zip -r wp-hotelier-wpml.$npm_package_version.zip wp-hotelier-wpml; cd ..",
 		"build": "npm run dirs -s; npm-run-all --silent --parallel build:*",
