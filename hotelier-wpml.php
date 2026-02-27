@@ -547,14 +547,6 @@ final class Hotelier_WPML {
 	 * Get all extras IDs in default language
 	 */
 	public function get_all_extras_ids() {
-		// Load from cache
-		$extras_ids = get_transient( 'hotelier_wpml_extras_ids_default_lang' );
-
-		// Valid cache found
-		if ( false !== $extras_ids ) {
-			return $extras_ids;
-		}
-
 		// Switch to the default language
 		global $sitepress;
 		$sitepress->switch_lang( $sitepress->get_default_language() );
@@ -574,8 +566,6 @@ final class Hotelier_WPML {
 
 		// Switch back to the current language
 		$sitepress->switch_lang( ICL_LANGUAGE_CODE );
-
-		set_transient( 'hotelier_wpml_extras_ids_default_lang', $extras, DAY_IN_SECONDS * 30 );
 
 		return $extras;
 	}
