@@ -3,11 +3,11 @@
  * Plugin Name:       WP Hotelier Multilingual
  * Plugin URI:        http://wphotelier.com/
  * Description:       Run a multilingual website with WP Hotelier and WPML.
- * Version:           1.5.0
+ * Version:           1.5.1
  * Author:            WP Hotelier
  * Author URI:        http://wphotelier.com/
  * Requires at least: 4.0
- * Tested up to:      5.2
+ * Tested up to:      6.9
  * Text Domain:       wp-hotelier-wpml
  * Domain Path:       languages
  *
@@ -27,7 +27,7 @@ final class Hotelier_WPML {
 	/**
 	 * @var string
 	 */
-	public $version = '1.5.0';
+	public $version = '1.5.1';
 
 	/**
 	 * @var Hotelier_WPML The single instance of the class
